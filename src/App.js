@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import { AppBar, Container, Toolbar, Typography } from "@mui/material";
+
+import { QueryRepl } from "components/QueryRepl";
+import { withTheme } from "components/Theme";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <AppBar position="relative">
+        <Toolbar>
+          <Typography variant="h5" noWrap>
+            Tribos Playground
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <main>
+        <Container>
+          <QueryRepl />
+        </Container>
+      </main>
+    </React.Fragment>
   );
 }
 
-export default App;
+export default withTheme(App);
