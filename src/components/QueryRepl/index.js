@@ -28,7 +28,7 @@ export const QueryRepl = () => {
       }
     };
     initPk();
-  }, []);
+  }, [pk]);
 
   return (
     <Container>
