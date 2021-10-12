@@ -7,9 +7,7 @@ export const initializeProskomma = async (subDir) => {
 
   for await (const bookNumber of bookNumbers) {
     const paddedBookNumber = bookNumber.toString().padStart(2, "0");
-    console.log(`Load ${paddedBookNumber}`);
     const bookData = await import(`../data/${subDir}/${paddedBookNumber}.json`);
-    console.log(bookData.default);
     await pk.loadSuccinctDocSet(bookData);
   }
 
