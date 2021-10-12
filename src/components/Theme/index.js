@@ -1,12 +1,12 @@
 import React from "react";
 import {
   ThemeProvider,
-  createMuiTheme,
+  createTheme,
 } from "@mui/material/styles";
 
 import {CssBaseline} from "@mui/material";
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     mode: "dark",
   },
