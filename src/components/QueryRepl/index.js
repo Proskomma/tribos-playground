@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Grid, Container, Typography, TextField, Button } from "@mui/material";
 import gqlPrettier from "graphql-prettier";
 
+import ResultsView from "components/ResultsView";
 import { initializeProskomma } from "proskommaUtils";
 
 const runQuery = async (pk, query, setResult) => {
@@ -9,6 +10,7 @@ const runQuery = async (pk, query, setResult) => {
   try {
     const result = await pk.gqlQuery(query);
     console.timeEnd("Query");
+    console.log("Query Result", result);
     setResult(JSON.stringify(result, null, 2));
   } catch (error) {
     console.error(error);
@@ -19,6 +21,7 @@ export const QueryRepl = () => {
   const [pk, setPk] = useState(null);
   const [query, setQuery] = useState("");
   const [result, setResult] = useState("");
+  const [formattingError, setFormattingError] = useState(false);
 
   useEffect(() => {
     const initPk = async () => {
@@ -47,28 +50,35 @@ export const QueryRepl = () => {
             }}
           />
         </Grid>
-        <Grid item lg={6} align="center">
-          <Typography variant="h6">Result</Typography>
-          <TextField
-            multiline
-            rows={20}
-            fullWidth
-            inputProps={{ style: { fontFamily: "monospace" } }}
-            value={result}
-          />
+        <Grid item xl={6} align="center">
+          <ResultsView result={result} />
         </Grid>
       </Grid>
       <Grid container justify="center" spacing={2}>
-        <Grid item lg={6} align="center">
+        <Grid item xl={6} align="center">
           <Button
             variant="contained"
             sx={{ m: 2 }}
             onClick={() => {
-              setQuery(gqlPrettier(query));
+              try {
+                setQuery(gqlPrettier(query));
+                setFormattingError(false);
+              } catch (error) {
+                console.error(
+                  "Something went wrong when formatting the query: ",
+                  query
+                );
+                setFormattingError(true);
+              }
             }}
           >
             Format Query
           </Button>
+          {formattingError && (
+            <Typography sx={{color: "red"}}>
+              Formatting the query caused a problem.
+            </Typography>
+          )}
         </Grid>
         <Grid item lg={6} align="center">
           <Button
