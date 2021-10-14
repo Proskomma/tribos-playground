@@ -20,7 +20,6 @@ export const ResultsView = (props) => {
     JSON.parse(usableResult),
     "tribos",
     (value) => {
-      console.log("maybe value", typeof value, value);
       return JSON.parse(value);
     }
   );
