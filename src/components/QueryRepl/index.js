@@ -37,7 +37,7 @@ export const QueryRepl = () => {
     <Container>
       <p>Is Proskomma loaded? {pk ? "Yes" : "No"}</p>
       <Grid container justify="center" spacing={2}>
-        <Grid item lg={6} align="center">
+        <Grid item lg={10} align="center">
           <Typography variant="h6">Query</Typography>
           <TextField
             multiline
@@ -50,15 +50,10 @@ export const QueryRepl = () => {
             }}
           />
         </Grid>
-        <Grid item xl={6} align="center">
-          <ResultsView result={result} />
-        </Grid>
-      </Grid>
-      <Grid container justify="center" spacing={2}>
-        <Grid item xl={6} align="center">
+        <Grid item md={2} align="center">
           <Button
             variant="contained"
-            sx={{ m: 2 }}
+            sx={{ m: 2, marginTop: 4 }}
             onClick={() => {
               try {
                 setQuery(gqlPrettier(query));
@@ -72,15 +67,9 @@ export const QueryRepl = () => {
               }
             }}
           >
-            Format Query
+            Format
           </Button>
-          {formattingError && (
-            <Typography sx={{color: "red"}}>
-              Formatting the query caused a problem.
-            </Typography>
-          )}
-        </Grid>
-        <Grid item lg={6} align="center">
+
           <Button
             variant="contained"
             sx={{ m: 2 }}
@@ -88,10 +77,20 @@ export const QueryRepl = () => {
               runQuery(pk, query, setResult);
             }}
           >
-            Run Query
+            Run
           </Button>
+          {formattingError && (
+            <Typography sx={{ color: "red" }}>
+              Formatting the query caused a problem.
+            </Typography>
+          )}
+        </Grid>
+
+        <Grid item xl={10} align="center">
+          <ResultsView result={result} />
         </Grid>
       </Grid>
+      <Grid container justify="center" spacing={2}></Grid>
     </Container>
   );
 };
