@@ -86,7 +86,7 @@ export const QueryRepl = () => {
           )}
         </Grid>
 
-        <Grid item xl={10} align="center">
+        <Grid item lg={10} align="center">
           <ResultsView result={result} />
         </Grid>
       </Grid>

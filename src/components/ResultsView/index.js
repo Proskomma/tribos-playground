@@ -37,7 +37,6 @@ export const ResultsView = (props) => {
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList
               onChange={handleTabChange}
-              aria-label="lab API tabs example"
             >
               <Tab label="Raw" value="1" />
               <Tab label="Formatted" value="2" />
